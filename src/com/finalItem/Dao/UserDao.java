@@ -1,4 +1,4 @@
-package com.finalItemDao;
+package com.finalItem.Dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

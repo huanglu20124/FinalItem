@@ -1,4 +1,4 @@
-package com.finalItemDao;
+package com.finalItem.Dao;
 
 import com.finalItem.util.DaoUtil;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
