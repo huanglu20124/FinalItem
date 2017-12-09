@@ -1,0 +1,68 @@
+package com.finalItemDao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.finalItem.domain.User;
+import com.finalItem.util.DaoUtil;
+import com.mchange.v2.c3p0.ComboPooledDataSource;
+
+
+public class UserDao {
+	private ComboPooledDataSource dataSource = DaoUtil.getDataSource();
+	
+	public Integer registerUser(User user) throws SQLException{
+		Integer id = null;
+		String sql = "insert into user values"
+				+ "(null,?,?,?,"
+				+ " ?,?,?,"
+				+ " ?,?,?,"
+				+ " ?);";
+		Connection connection = dataSource.getConnection();
+		PreparedStatement psm = connection.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+		psm.setString(1, user.getUser_account());
+		psm.setString(2, user.getUser_password());
+		psm.setString(3, user.getUser_nickname());
+		psm.setString(4, user.getSex());
+		psm.setString(5, user.getUser_register_time());
+		psm.setString(6, user.getUser_problem());
+		psm.setString(7, user.getUser_answer());
+		psm.setInt(8, user.getUser_good());
+		psm.setString(9, user.getTelephone());
+		psm.setString(10, user.getEmail());
+		psm.executeUpdate();
+		ResultSet rs = psm.getGeneratedKeys();
+		if(rs.next()){
+			id = rs.getInt(1);
+		}
+		DaoUtil.close(connection, psm, rs);
+		return id;
+	}
+
+	public User loginUser(String user_acccount, String user_password) throws SQLException {
+		String sql = "select * from user where user_account=? and user_password=?";
+		Connection connection = dataSource.getConnection();
+		PreparedStatement psm = connection.prepareStatement(sql);
+		psm.setString(1, user_acccount);
+		psm.setString(2, user_password);
+		ResultSet resultSet = psm.executeQuery();
+		while(resultSet.next()){
+			User user = new User();
+			user.setEmail(resultSet.getString("email"));
+			user.setTelephone(resultSet.getString("telephone"));
+			user.setSex(resultSet.getString("sex"));
+			user.setUser_account(resultSet.getString("user_account"));
+			user.setUser_answer(resultSet.getString("user_answer"));
+			user.setUser_problem(resultSet.getString("user_problem"));
+			user.setUser_good(resultSet.getInt("user_good"));
+			user.setUser_id(resultSet.getInt("user_id"));
+			user.setUser_nickname(resultSet.getString("user_nickname"));
+			user.setUser_register_time(resultSet.getString("user_register_time"));
+			return user;
+		}
+		return null;
+	}
+}
