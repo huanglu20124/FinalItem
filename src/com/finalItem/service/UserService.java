@@ -5,9 +5,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.finalItem.dao.UserDao;
 import com.finalItem.domain.User;
 import com.finalItem.util.TimeUtil;
-import com.finalItemDao.UserDao;
 
 public class UserService {
 	private UserDao userDao = new UserDao();
