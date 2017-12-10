@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.tribes.group.ChannelCoordinator;
+
 import com.finalItem.dao.UserDao;
 import com.finalItem.domain.User;
 import com.finalItem.util.TimeUtil;
@@ -67,8 +69,10 @@ public class UserService {
 					// 放到cookie里，下次自动登录
 					Cookie account_cookie = new Cookie("user_account", user_acccount);
 					Cookie password_cookie = new Cookie("user_password", user_password);
+					Cookie autoLogin_cookie = new Cookie("autoLogin", "autoLogin");
 					response.addCookie(account_cookie);
 					response.addCookie(password_cookie);
+					response.addCookie(autoLogin_cookie);
 				}
 				try {
 					response.sendRedirect("/final_item/main.jsp");
