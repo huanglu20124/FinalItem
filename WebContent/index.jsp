@@ -47,7 +47,7 @@
 		<main>
 			<div class="left_main">
 				<div class="left_img_container">
-					<img src="images/麦田.jpg" style="width: 100%;" />
+					<img src="images/麦田.jpg" style="width: 100%;" id="left_img"/>
 					<div class="left_img_desc">
 						<p class="left_img_desc_content">连黄牛都玩AI了 春节抢票不加钱回不了家了</p>
 						<span></span><span></span><span></span><span></span><span></span>
@@ -64,7 +64,7 @@
 					<div class="left_note">
 						<p class="note_hd"><a href="detail.jsp?note_id=<%=note.getNote_id()%>"><%=note.getNote_title()%></a></p>
 						<div class="note_desc">
-							<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
+							<img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;">
 							<span><%=note.getUser_name()%></span>
 							<span><%=note.getNote_time()%></span>
 							<span><%=note.getRat_name()%></span>
@@ -133,8 +133,57 @@
 	   <% 
 	      List<Note> list = noteService.getHotNote(request, response);
 	   %>
-		  var y = <%=JSON.toJSONString(list)%>
-		  console.log(y);
+			var noteImg_array = <%=JSON.toJSONString(list)%>
+			console.log(noteImg_array);
+			var index = 0; //记录滚动图片的索引
+			var left_img = document.getElementById("left_img");
+			var left_img_desc = document.getElementsByClassName("left_img_desc")[0];
+		    var left_img_desc_content = document.getElementsByClassName("left_img_desc_content")[0];
+		    var span_ = left_img_desc.getElementsByTagName("span");
+
+		    //增删class属性
+		    function addClass(obj, cls){
+			    var obj_class = obj.className,//获取 class 内容.
+		        blank = (obj_class != '') ? ' ' : '';//判断获取到的 class 是否为空, 如果不为空在前面加个'空格'.
+			    added = obj_class + blank + cls;//组合原来的 class 和需要添加的 class.
+			    obj.className = added;//替换原来的 class.
+			}
+
+			function removeClass(obj, cls){
+			    var obj_class = ' '+obj.className+' ';//获取 class 内容, 并在首尾各加一个空格. ex) 'abc    bcd' -> ' abc    bcd '
+			    obj_class = obj_class.replace(/(\s+)/gi, ' '),//将多余的空字符替换成一个空格. ex) ' abc    bcd ' -> ' abc bcd '
+		        removed = obj_class.replace(' '+cls+' ', ' ');//在原来的 class 替换掉首尾加了空格的 class. ex) ' abc bcd ' -> 'bcd '
+			    removed = removed.replace(/(^\s+)|(\s+$)/g, '');//去掉首尾空格. ex) 'bcd ' -> 'bcd'
+			    obj.className = removed;//替换原来的 class.
+			}
+
+			function hasClass(obj, cls){
+			    var obj_class = obj.className;//获取 class 内容
+			    console.log(obj_class + " " + cls);
+		        if(obj_class.indexOf(cls) != -1) {
+		            return true;
+		        }
+    			return false;
+    		}
+
+			// 改变图片和内容
+			function slideImage() {
+				left_img.setAttribute("src", noteImg_array[index].images[0]);
+				left_img_desc_content.innerHTML = noteImg_array[index].note_title;
+				for(var i = 0; i < 5; i++) {
+					if(hasClass(span_[i], "doc_hover")) {
+						removeClass(span_[i], "doc_hover");
+					}
+				}
+				addClass(span_[index], "doc_hover");
+				index = (index+1) % 5;
+				setTimeout(arguments.callee, 4000);
+			}
+
+			window.onload = function() {
+				slideImage();
+			}
+
 	</script>
 </body>
 </html>

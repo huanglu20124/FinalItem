@@ -55,7 +55,7 @@ main {
 
 .left_img_container{
 	width: 100%;
-	height: auto;
+	height: 525px;
 	overflow: hidden;
 	position: relative;
 	/*background-color: rgba(200, 200, 200, 0.8);*/
@@ -100,19 +100,22 @@ main {
 	background-color: rgba(240, 240, 240, 0.8);
 }
 
-.note_hd {
-	font-size: 20px;
+.note_hd a{
+	font-size: 18px;
 	line-height: 2em;
 	margin-bottom: 0.5em;
 	
 }
 
-.note_hd:hover {
+.note_hd a:hover {
 	color: rgb(205,46,22);	
 }
 
+.note_desc {
+	padding: 5px 6px; 
+}
 
-.note_desc span{
+.note_desc span, .note_desc img{
 	display: inline-block;
 	margin-right: 1em;
 	vertical-align: middle;
@@ -142,6 +145,11 @@ main {
 	margin: 15px 0px;
 }
 
+.hamester_list p a:hover {
+	color: rgb(205,46,22);
+	text-decoration: underline;
+}
+
 .rank {
 	margin-top: 20px;
 }
@@ -157,6 +165,10 @@ main {
 
 .rank_list_item span:last-child {
 	color: rgba(205,46,22, 0.8);
+}
+
+.left_img_desc span.doc_hover {
+	content: url("../images/doc_hover.png");
 }
 
 /* login.jsp */
