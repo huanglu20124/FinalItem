@@ -10,15 +10,22 @@ body {
 }
 
 header {
-	overflow: auto;
+	width: 100%;
+	overflow: hidden;
 	background-color: white;
 	padding: 10px 15px;
 	height: 60px;
 }
 
+.header_span span, .header_span img {
+	display: inline-block;
+	vertical-align: middle;
+}
+
 .main_content {
 	width: 1050px;
 	margin: 0 auto;
+	overflow: hidden;
 }
 
 a:link, a:visited, a:active {
@@ -63,6 +70,14 @@ main {
 	text-align: center;
 	width: 100%;
 	color: white;
+}
+
+.left_img_desc span {
+	width: 10px;
+	height: 10px;
+	content: url('../images/doc.png');
+	margin: 5px 3px 0px;
+	cursor: pointer;
 }
 
 .left_img_desc_content {
@@ -143,6 +158,130 @@ main {
 .rank_list_item span:last-child {
 	color: rgba(205,46,22, 0.8);
 }
+
+/* login.jsp */
+#subheader {
+	width: 630px;
+	height: 200px;
+	margin: auto;
+	background-image: url("../images/register_background.jpg");
+	background-size: cover;
+}
+
+#subheader #title {
+	position: relative;
+	top: 100px;
+	left: 290px;
+	color: rgb(100, 100, 100);
+	font-family: "楷体";
+	font-size: 2.2em;
+	font_weight: bold;
+}
+
+#subheader #choice {
+	position: relative;
+	color: black;
+	font-family: "宋体";
+	top: 120px;
+	left: 350px;
+	font-size: 1.5em;
+	font_weight: bold;
+}
+
+#registerChoice {
+	display: inline-block;
+	width: 100px;
+}
+
+#loadChoice {
+	display: inline-block;
+	width: 100px;
+}
+
+#contents {
+	width: 600px;
+	margin: 30px auto;
+}
+
+#form {
+	width: 350px;
+	margin: 10px auto;
+}
+
+.formItem {
+	margin: 20px auto;
+}
+
+#username {
+	border: solid 2px #ccc;
+	border-radius: 10px;
+	width: 350px;
+	height: 40px;
+	background: url(../images/用户.png) no-repeat 0 center, url(../images/竖线.png) no-repeat 15px 3px;
+	background-size: 30px 30px, 10% 100%;
+}
+
+#password {
+	border: solid 2px #ccc;
+	border-radius: 10px;
+	width: 350px;
+	height: 40px;
+	background: url(../images/密码.png) no-repeat 0 center, url(../images/竖线.png) no-repeat 15px 3px;
+	background-size: 30px 30px, 10% 100%;
+}
+
+#username input,
+#password input {
+	border: none;
+	background: none;
+	height: 40px;
+	width: 100%;
+	text-indent: 40px;
+	font-size: 1.1em;
+}
+
+#autoLoad {
+	margin: 0 auto 20px;
+	float: left;
+}
+
+#forgetPassw {
+	float: right;
+	font-size: 0.8em;
+	margin: 0 auto 20px;
+}
+
+#loadButton input {
+	clear: both;
+	display: block;
+	margin: 30px auto;
+	width: 250px;
+	height: 35px;
+	font-size: 1.5em;
+}
+
+#footer {
+	margin: auto 8%;
+}
+
+#subfooter1 {
+	width: 600px;
+	margin: auto;
+}
+
+#subfooter1 li {
+	float: left;
+	margin: 30px 5px 5px 5px;
+	line-height: 30px;
+	vertical-align: middle;
+	list-style-type: none;
+}
+
+#subfooter2 {
+	text-align: center;
+	clear: both;
+}
+
 
 /*flex*/
 .flex {
