@@ -81,10 +81,13 @@
 				}
 				int pgprev = (pgno > 0) ? pgno - 1 : 0;
 				int pgnext = pgno + 1;
+				String pgno_display = (pgno == 0 ? "display: none;":"");
+				Integer page_sum = (Integer)session.getAttribute("page_sum");
+				String pgnext_display = (page_sum == pgnext ? "display: none;":"");
 			    %>
 			   <div style="float: right">
-			   <a href="index.jsp?page=<%=pgprev%>">上一页</a> 
-			   <a href="index.jsp?page=<%=pgnext%>">下一页</a>
+			   <a style="<%=pgno_display%>"  href="index.jsp?page=<%=pgprev%>">上一页</a> 
+			   <a style="<%=pgnext_display%>" href="index.jsp?page=<%=pgnext%>">下一页</a>
 		      </div>
 				</div>
 			</div>

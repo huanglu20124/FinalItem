@@ -189,4 +189,26 @@ public class NoteDao {
 		return null;
 	}
 
+	
+	public Integer getNoteSum() {
+		//查询总页数
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		String sql = "select count(*) from note";
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			rs = psm.executeQuery();
+			while(rs.next()){
+				Integer sum = rs.getInt(1);
+				return (sum/3) + 1;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+		return null;
+	}
+
 }

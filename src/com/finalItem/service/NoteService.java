@@ -51,7 +51,12 @@ public class NoteService {
 		if (notes == null) {
 			notes = new ArrayList<>();
 		}
-		return notes;
+		//同时，查询总页数，放到session域中
+		if(request.getSession().getAttribute("page_num") == null){
+			Integer page_sum = noteDao.getNoteSum();
+			request.getSession().setAttribute("page_sum", page_sum);
+		}
+    	return notes;
 	}
 
 	public String addNote(HttpServletRequest request, HttpServletResponse response){
