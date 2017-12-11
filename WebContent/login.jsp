@@ -20,7 +20,7 @@
 				width: 630px;
 				height: 200px;
 				margin: auto;
-				background-image: url("pic/register_background.jpg");
+				background-image: url("images/register_background.jpg");
 				background-size: cover;
 			}
 			
