@@ -37,7 +37,7 @@ public class UserService {
 		} else {
 			user.setUser_id(user_id);
 			msg = "注册成功，5秒后将跳转到主界面";
-			response.setHeader("refresh", "5;url=/final_item/main.jsp");
+			response.setHeader("refresh", "5;url=/final_item/index.jsp");
 			// 放到session里面
 			request.getSession().setAttribute("user", user);
 			request.setAttribute("msg", msg);
@@ -75,7 +75,7 @@ public class UserService {
 					response.addCookie(autoLogin_cookie);
 				}
 				try {
-					response.sendRedirect("/final_item/main.jsp");
+					response.sendRedirect("/final_item/index.jsp");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
