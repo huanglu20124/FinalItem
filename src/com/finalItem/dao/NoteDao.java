@@ -53,6 +53,7 @@ public class NoteDao {
 		try {
 			connection = dataSource.getConnection();
 			psm = connection.prepareStatement(sql);
+			psm.setInt(1, note_id);
 			rs = psm.executeQuery();
 			List<String>images = new ArrayList<>();
 			while(rs.next()){
