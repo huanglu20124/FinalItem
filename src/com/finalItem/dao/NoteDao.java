@@ -71,17 +71,17 @@ public class NoteDao {
 
 	public List<SimpleNote> getSimpleNotes(String page_str){
 		String sql = "select a.note_id, a.user_id,a.note_title,a.note_content,a.note_time,a.note_uuid, "
-				+ " b.user_nickname"
-				+ "  from note a, user b where a.user_id=b.user_id "
+				+ " a.rat_id, c.rat_name, b.user_nickname"
+				+ "  from note a, user b, rat c where a.user_id=b.user_id and a.rat_id=c.rat_id"
 				+ " order by note_id"
-				+ " desc limit ?,20";
+				+ " desc limit ?,3";
 		Connection connection = null;
 		PreparedStatement psm = null;
 		ResultSet rs = null;	
 		try {
 			connection = dataSource.getConnection();
 			psm = connection.prepareStatement(sql);
-			psm.setInt(1, new Integer(page_str));
+			psm.setInt(1, new Integer(page_str)*3);
 			rs = psm.executeQuery();
 			List<SimpleNote>notes = new ArrayList<>();
 			while (rs.next()) {
@@ -92,6 +92,8 @@ public class NoteDao {
 				simpleNote.setNote_title(rs.getString("note_title"));
 				simpleNote.setNote_time(rs.getString("note_time"));
 				simpleNote.setNote_uuid(rs.getString("note_uuid"));
+				simpleNote.setRat_id(rs.getInt("rat_id"));
+				simpleNote.setRat_name(rs.getString("rat_name"));
 				notes.add(simpleNote);
 			}
 			return notes;

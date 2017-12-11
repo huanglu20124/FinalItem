@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.finalItem.domain.User;
 import com.finalItem.util.DaoUtil;
@@ -83,5 +85,39 @@ public class UserDao {
 			DaoUtil.close(connection, psm, resultSet);
 		}
 		return null;
+	}
+
+	
+    public List<User> getUserGoodRank() {
+		String sql = "select * from user order by user_good desc limit 0,10";
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet resultSet = null;	
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			List<User>users = new ArrayList<>();
+			resultSet = psm.executeQuery();
+			while(resultSet.next()){
+				User user = new User();
+				user.setEmail(resultSet.getString("email"));
+				user.setTelephone(resultSet.getString("telephone"));
+				user.setSex(resultSet.getString("sex"));
+				user.setUser_account(resultSet.getString("user_account"));
+				user.setUser_answer(resultSet.getString("user_answer"));
+				user.setUser_problem(resultSet.getString("user_problem"));
+				user.setUser_good(resultSet.getInt("user_good"));
+				user.setUser_id(resultSet.getInt("user_id"));
+				user.setUser_nickname(resultSet.getString("user_nickname"));
+				user.setUser_register_time(resultSet.getString("user_register_time"));
+				users.add(user);
+			}
+			return users;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}finally {
+			DaoUtil.close(connection, psm, resultSet);
+		}
 	}
 }

@@ -42,7 +42,7 @@ public class NoteService {
 	}
 
 	public List<SimpleNote> getSimpleNotes(HttpServletRequest request, HttpServletResponse response) {
-		// 根据时间顺序分页查询帖子(包含标题 作者 时间 id等文字内容s)
+		// 根据时间顺序分页查询帖子(包含标题 作者 时间 id等文字内容s),5条
 		List<SimpleNote> notes = null;
 		String page_str = request.getParameter("page");
 		if (page_str != null) {

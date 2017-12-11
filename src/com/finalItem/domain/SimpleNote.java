@@ -10,6 +10,8 @@ public class SimpleNote {
 	private String user_name;
 	private String note_title; // 标题;
 	private String note_time; // 时间
+	private Integer rat_id;
+	private String rat_name;
 	private String note_uuid; // 唯一id，后期索引搜索可能用到
 	public Integer getNote_id() {
 		return note_id;
@@ -46,6 +48,18 @@ public class SimpleNote {
 	}
 	public void setNote_uuid(String note_uuid) {
 		this.note_uuid = note_uuid;
+	}
+	public Integer getRat_id() {
+		return rat_id;
+	}
+	public void setRat_id(Integer rat_id) {
+		this.rat_id = rat_id;
+	}
+	public String getRat_name() {
+		return rat_name;
+	}
+	public void setRat_name(String rat_name) {
+		this.rat_name = rat_name;
 	}
 	
 }

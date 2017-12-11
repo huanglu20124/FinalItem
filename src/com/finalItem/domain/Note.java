@@ -8,27 +8,9 @@ import java.util.List;
  * @author huanglu
  */
 public class Note extends SimpleNote {
-	private Integer rat_id;
-	private String rat_name;
 	private String note_content; // 内容;
 	private List<String> images; // 帖子图片
 	private Integer good_num; // 点赞数量
-
-	public Integer getRat_id() {
-		return rat_id;
-	}
-
-	public void setRat_id(Integer rat_id) {
-		this.rat_id = rat_id;
-	}
-
-	public String getRat_name() {
-		return rat_name;
-	}
-
-	public void setRat_name(String rat_name) {
-		this.rat_name = rat_name;
-	}
 
 	public String getNote_content() {
 		return note_content;

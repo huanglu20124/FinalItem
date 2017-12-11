@@ -1,3 +1,8 @@
+<%@page import="com.finalItem.service.RatService"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.finalItem.domain.Rat"%>
+<%@page import="com.finalItem.service.UserService"%>
+<%@page import="com.finalItem.domain.SimpleNote"%>
 <%@page import="com.finalItem.service.NoteService"%>
 <%@page import="com.finalItem.domain.Note"%>
 <%@page import="java.util.List"%>
@@ -29,8 +34,11 @@
 		<div class="main_content">
 			<span class="header_span" style="display:inline-block; float: right;">
 				<span><a href="logout.jsp">退出登录</a></span>
-				<span><a href="" style="margin-left: 1.5em;"><%=user_name %></a></span>
-				<img src="images/头像.png" style="height: 30px; margin-left: 1em;">
+				<span style="margin-top: 5px">
+				<a href="person.jsp?user_id=<%=user.getUser_id()%>" style="margin-left: 1.5em;">
+				<%=user_name %><img src="images/头像.png" style="height: 30px; margin-left: 1em;">
+				</a>
+				</span>
 			</span>
 			<img src="images/logo.png" style="height: 40px;" />
 		</div>
@@ -47,35 +55,37 @@
 				</div>
 
 				<div class="left_note_container">
+				<% 
+				   NoteService noteService = new NoteService();
+				   List<SimpleNote>simpleNotes = noteService.getSimpleNotes(request, response);
+				   for(int i = 0; i < simpleNotes.size(); i++){
+					  SimpleNote note = simpleNotes.get(i);
+				%>
 					<div class="left_note">
-						<p class="note_hd">JavaScript文字张草</p>
+						<p class="note_hd"><a href="detail.jsp?note_id=<%=note.getNote_id()%>"><%=note.getNote_title()%></a></p>
 						<div class="note_desc">
 							<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
-							<span>司马懿字仲达</span>
-							<span>12月08日 11:37</span>
-							<span>标签</span>
+							<span><%=note.getUser_name()%></span>
+							<span><%=note.getNote_time()%></span>
+							<span><%=note.getRat_name()%></span>
 						</div>
 					</div>
-
-					<div class="left_note">
-						<p class="note_hd">JavaScript文字张草</p>
-						<div class="note_desc">
-							<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
-							<span>司马懿字仲达</span>
-							<span>12月08日 11:37</span>
-							<span>标签</span>
-						</div>
-					</div>
-
-					<div class="left_note">
-						<p class="note_hd">JavaScript文字张草</p>
-						<div class="note_desc">
-							<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
-							<span>司马懿字仲达</span>
-							<span>12月08日 11:37</span>
-							<span>标签</span>
-						</div>
-					</div>
+                <% }%>
+                <!-- 处理分页 -->
+               <%
+				Integer pgno = 0; //当前页号
+				Integer pgcnt = 4; //每页行数
+				String param = request.getParameter("page");
+				if (param != null && !param.isEmpty()) {
+					pgno = Integer.parseInt(param);
+				}
+				int pgprev = (pgno > 0) ? pgno - 1 : 0;
+				int pgnext = pgno + 1;
+			    %>
+			   <div style="float: right">
+			   <a href="index.jsp?page=<%=pgprev%>">上一页</a> 
+			   <a href="index.jsp?page=<%=pgnext%>">下一页</a>
+		      </div>
 				</div>
 			</div>
 			<div class="right_main">
@@ -84,11 +94,13 @@
 						<a href="">仓鼠百科</a>
 					</p>
 					<div class="hamester_list">
-						<p><a href="">图文直播 | BDTC 2017 中国大数据技术大会正在进行</a></p>
-						<p><a href="">图文直播 | BDTC 2017 中国大数据技术大会正在进行</a></p>
-						<p><a href="">图文直播 | BDTC 2017 中国大数据技术大会正在进行</a></p>
-						<p><a href="">图文直播 | BDTC 2017 中国大数据技术大会正在进行</a></p>
-						<p><a href="">图文直播 | BDTC 2017 中国大数据技术大会正在进行</a></p>
+					<% List<Rat>rat_list = new RatService().getHotRats(request, response);
+					   for(int i = 0; i < rat_list.size(); i++)  
+					   {
+						   Rat rat = rat_list.get(i);
+					   %>
+						<p><a href="rat.jsp?<%=rat.getRat_id()%>"><%=rat.getRat_name() %>  | <%=rat.getRat_description().substring(0,15)%></a></p>
+					   <%}%>
 					</div>
 				</div>
 				<div class="rank">
@@ -96,36 +108,33 @@
 						<a>博主排名榜</a>
 					</p>
 					<div class="rank_list">
+					    <%
+					        UserService userService = new UserService();
+					        List<User>users = userService.getUserGoodRank(request, response);
+					        for(int i = 0; i < users.size(); i++)
+					        {
+					        	User oneUser = users.get(i);
+					        	String honour = Const.honours[i];
+					    %>
 						<p class="rank_list_item">
-							<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
-							<span style="margin-left: 1em;">司马懿字仲达</span>
-							<span style="margin-left: 1em;">称号</span>
+						    <a href="person.jsp?user_id=<%=oneUser.getUser_id()%>">
+						       	<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
+							    <span style="margin-left: 1em; color: black;"><%=oneUser.getUser_nickname()%></span>
+						    </a>
+							<span style="margin-left: 1em;"><%=honour%></span>
 						</p>
-						<p class="rank_list_item">
-							<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
-							<span style="margin-left: 1em;">司马懿字仲达</span>
-							<span style="margin-left: 1em;">称号</span>
-						</p>
-						<p class="rank_list_item">
-							<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
-							<span style="margin-left: 1em;">司马懿字仲达</span>
-							<span style="margin-left: 1em;">称号</span>
-						</p>
-						<p class="rank_list_item">
-							<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
-							<span style="margin-left: 1em;">司马懿字仲达</span>
-							<span style="margin-left: 1em;">称号</span>
-						</p>
+						<%}%>
 					</div>
 				</div>
 			</div>
 		</main>
 	</div>
 	<script type="text/javascript">
-	   <% NoteService noteService = new NoteService();
-	      List<Note> list = noteService.getHotNote(request, response);%>
-		var y = <%=JSON.toJSONString(list)%>
-		console.log(y);
+	   <% 
+	      List<Note> list = noteService.getHotNote(request, response);
+	   %>
+		  var y = <%=JSON.toJSONString(list)%>
+		  console.log(y);
 	</script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.finalItem.service;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.Cookie;
@@ -37,7 +38,7 @@ public class UserService {
 		} else {
 			user.setUser_id(user_id);
 			msg = "注册成功，5秒后将跳转到主界面";
-			response.setHeader("refresh", "5;url=/final_item/index.jsp");
+			response.setHeader("refresh", "5;url=/final_item/index.jsp?page=0");
 			// 放到session里面
 			request.getSession().setAttribute("user", user);
 			request.setAttribute("msg", msg);
@@ -75,7 +76,7 @@ public class UserService {
 					response.addCookie(autoLogin_cookie);
 				}
 				try {
-					response.sendRedirect("/final_item/index.jsp");
+					response.sendRedirect("/final_item/index.jsp?page=0");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -100,8 +101,9 @@ public class UserService {
 	}
 
 	public List<User> getUserGoodRank(HttpServletRequest request, HttpServletResponse response) {
-		// 获取用户排行榜,上限20个
-		List<User> list = null;
-		return null;
+		// 获取用户排行榜,上限10个
+		List<User> list = userDao.getUserGoodRank();
+		if(list == null) list = new ArrayList<>();
+		return list;
 	}
 }
