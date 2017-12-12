@@ -71,21 +71,28 @@
 						</div>
 					</div>
                 <% }%>
-                <!-- 处理分页 -->
-               <%
-				Integer pgno = 0; //当前页号
-				Integer pgcnt = 4; //每页行数
-				String param = request.getParameter("page");
-				if (param != null && !param.isEmpty()) {
-					pgno = Integer.parseInt(param);
-				}
-				int pgprev = (pgno > 0) ? pgno - 1 : 0;
-				int pgnext = pgno + 1;
-			    %>
-			   <div style="float: right">
-			   <a href="index.jsp?page=<%=pgprev%>">上一页</a> 
-			   <a href="index.jsp?page=<%=pgnext%>">下一页</a>
-		      </div>
+	                <!-- 处理分页 -->
+	                <div class="page_foot">
+						<span class="left_page"><<</span>
+						<span class="page_desc">
+							当前页数 <span class="cur_page"><%=request.getParameter("page") %></span>/<span class="all_page">1</span>
+						</span>
+						<span class="right_page">>></span>
+					</div>
+	               <%
+					Integer pgno = 0; //当前页号
+					Integer pgcnt = 4; //每页行数
+					String param = request.getParameter("page");
+					if (param != null && !param.isEmpty()) {
+						pgno = Integer.parseInt(param);
+					}
+					int pgprev = (pgno > 0) ? pgno - 1 : 0;
+					int pgnext = pgno + 1;
+				    %>
+				   <div style="float: right">
+				   <a href="index.jsp?page=<%=pgprev%>">上一页</a> 
+				   <a href="index.jsp?page=<%=pgnext%>">下一页</a>
+			      </div>
 				</div>
 			</div>
 			<div class="right_main">
@@ -140,6 +147,7 @@
 			var left_img_desc = document.getElementsByClassName("left_img_desc")[0];
 		    var left_img_desc_content = document.getElementsByClassName("left_img_desc_content")[0];
 		    var span_ = left_img_desc.getElementsByTagName("span");
+		    var slideTimeout; //记录超时运行的函数
 
 		    //增删class属性
 		    function addClass(obj, cls){
@@ -177,11 +185,26 @@
 				}
 				addClass(span_[index], "doc_hover");
 				index = (index+1) % 5;
-				setTimeout(arguments.callee, 4000);
+				slideTimeout = setTimeout(arguments.callee, 4000);
 			}
 
 			window.onload = function() {
 				slideImage();
+				for(var i = 0; i < span_.lenght; i++) {
+					span_[i].onclick = (function(temp_index) {
+						clearTimeout(slideTimeout);
+						for(var j = 0; j < span_.lenght; j++) {
+							if(hasClass(span_[j], "doc_hover")) {
+								removeClass(span_[j], "doc_hover");
+							}
+						}
+						addClass(span_[temp_index], "doc_hover");
+						left_img.setAttribute("src", noteImg_array[temp_index].images[0]);
+						left_img_desc_content.innerHTML = noteImg_array[temp_index].note_title;
+						index = temp_index;
+						slideTimeout = setTimeout(slideImage, 4000);
+					})(i);
+				}
 			}
 
 	</script>
