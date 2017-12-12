@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <%@page import="com.finalItem.service.RatService"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.finalItem.domain.Rat"%>
