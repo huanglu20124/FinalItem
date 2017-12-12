@@ -173,7 +173,7 @@ public class NoteDao {
 				note.setNote_time(rs.getString("note_time"));
 				note.setNote_title(rs.getString("note_title"));
 				note.setNote_uuid(rs.getString("note_uuid"));
-				note.setRat_id(rs.getInt(rs.getInt("rat_id")));
+				note.setRat_id(rs.getInt("rat_id"));
 				note.setUser_id(rs.getInt("user_id"));
 				note.setRat_name(rs.getString("rat_name"));
 				note.setUser_name(rs.getString("user_nickname"));

@@ -33,7 +33,10 @@
 	<header>
 		<div class="main_content">
 			<span class="header_span" style="display:inline-block; float: right;">
-				<span><a href="logout.jsp">退出登录</a></span>
+				<span>
+				  <a href="newpost.jsp">发布帖子&nbsp</a>
+				  <a href="logout.jsp">退出登录</a>
+				</span>
 				<span style="margin-top: 5px">
 				<a href="person.jsp?user_id=<%=user.getUser_id()%>" style="margin-left: 1.5em;">
 				<%=user_name %><img src="images/头像.png" style="height: 30px; margin-left: 1em;">
@@ -62,7 +65,7 @@
 					  SimpleNote note = simpleNotes.get(i);
 				%>
 					<div class="left_note">
-						<p class="note_hd"><a href="detail.jsp?note_id=<%=note.getNote_id()%>"><%=note.getNote_title()%></a></p>
+						<p class="note_hd"><a href="post.jsp?note_id=<%=note.getNote_id()%>"><%=note.getNote_title()%></a></p>
 						<div class="note_desc">
 							<img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;">
 							<span><%=note.getUser_name()%></span>
@@ -97,6 +100,7 @@
 						<a href="">仓鼠百科</a>
 					</p>
 					<div class="hamester_list">
+					<img src="">
 					<% List<Rat>rat_list = new RatService().getHotRats(request, response);
 					   for(int i = 0; i < rat_list.size(); i++)  
 					   {
