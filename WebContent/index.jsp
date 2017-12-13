@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <%@page import="com.finalItem.service.RatService"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="com.finalItem.domain.Rat"%>
@@ -73,27 +72,22 @@
 					</div>
                 <% }%>
 	                <!-- 处理分页 -->
-	                <div class="page_foot">
-						<span class="left_page"><<</span>
-						<span class="page_desc">
-							当前页数 <span class="cur_page"><%=request.getParameter("page") %></span>/<span class="all_page">1</span>
-						</span>
-						<span class="right_page">>></span>
-					</div>
-	               <%
-					Integer pgno = 0; //当前页号
-					Integer pgcnt = 4; //每页行数
-					String param = request.getParameter("page");
-					if (param != null && !param.isEmpty()) {
-						pgno = Integer.parseInt(param);
-					}
-					int pgprev = (pgno > 0) ? pgno - 1 : 0;
-					int pgnext = pgno + 1;
+	                <%
+						Integer pgno = 0; //当前页号
+						String param = request.getParameter("page");
+						if (param != null && !param.isEmpty()) {
+							pgno = Integer.parseInt(param);
+						}
+						int pgprev = (pgno > 0) ? pgno - 1 : 0;
+						int pgnext = pgno + 1;
 				    %>
-				   <div style="float: right">
-				   <a href="index.jsp?page=<%=pgprev%>">上一页</a> 
-				   <a href="index.jsp?page=<%=pgnext%>">下一页</a>
-			      </div>
+	                <div class="page_foot">
+						<span class="left_page"><a href="index.jsp?page=<%=pgprev%>"><<</a></span>
+						<span class="page_desc">
+							当前页数 <span class="cur_page"><%=param%></span>/<span class="all_page"><%=session.getAttribute("page_sum")%></span>
+						</span>
+						<span class="right_page"><a href="index.jsp?page=<%=pgnext%>">>></a></span>
+					</div>
 				</div>
 			</div>
 			<div class="right_main">
@@ -133,6 +127,12 @@
 						</p>
 						<%}%>
 					</div>
+				</div>
+				<div class="relation_link">
+					<p class="rank_hd">
+						<a>相关链接</a>
+					</p>
+					<img src="images/rat_ba.jpg" style="width: 100%;" />
 				</div>
 			</div>
 		</main>

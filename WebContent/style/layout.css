@@ -122,7 +122,7 @@ main {
 	color: rgba(100, 100, 100, 0.6);
 }
 
-.hamster_know, .rank {
+.hamster_know, .rank, .relation_link {
 	width: 100%;
 	padding: 10px 20px;
 	background-color: white;
@@ -170,6 +170,40 @@ main {
 .left_img_desc span.doc_hover {
 	content: url("../images/doc_hover.png");
 }
+
+.page_foot {
+	width: 100%;
+	margin-top: 20px;
+	color: #7b7a8e;
+	text-align: center;
+}
+
+.page_foot_hd{
+	font-size: 13px;
+	/*font-weight: bold;*/
+	margin-right: 2em;
+}
+
+.page_foot div{
+	font-size: 14px;
+	/*font-weight: bold;*/
+	vertical-align: middle;
+	display: inline-block;
+}
+
+.page_foot .left_page, .page_foot .right_page, .page_foot .all_page, .page_foot .cur_page {
+	color: #337ab7;
+	cursor: pointer;
+}
+
+.page_foot .left_page {
+	margin-right: 2em;
+}
+
+.page_foot .right_page {
+	margin-left: 2em;
+}
+
 
 /* login.jsp */
 #subheader {
