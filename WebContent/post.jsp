@@ -1,3 +1,6 @@
+<%@page import="com.finalItem.util.Const"%>
+<%@page import="com.finalItem.service.NoteService"%>
+<%@page import="com.finalItem.domain.Note"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%request.setCharacterEncoding("utf-8");%>
@@ -5,18 +8,12 @@
 <%@ page import="org.apache.commons.fileupload.*"%>  
 <%@ page import="org.apache.commons.fileupload.disk.*"%>  
 <%@ page import="org.apache.commons.fileupload.servlet.*"%> 
-<% String url_name = ""; 
-   String url = "http://localhost:8080/final_item/file/";%>
-<% 
-	if(request.getParameter("exit") != null) {
-		response.sendRedirect("addpost.jsp");
-	}
-%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<title>小柒的帖子</title>
+	<title>详情页</title>
 	<style type="text/css">
 		html {
                 height:100%;
@@ -28,7 +25,7 @@
         }
         body {
         	width: 1050px;
-        	height: 100%;
+        	/* height: 100%; */
         	margin: 0 auto;
         	background-color:#FFFFFF;
         }
@@ -37,39 +34,38 @@
 			text-align: left;
 			height: 20px;
 			font-style: bold; 
-			font-size:  22px;
+			font-size:  30px;
 			/*background-color: gray;*/
 		}
 		#post_detail {
-			height: 600px;
+			/* height: 600px; */
 			padding: 10px 70px 0px 70px;
 			/*background-color: gray;*/
 		}
 		#artical {
 			width:900px;
-			overflow: auto;
-			height: 600px;
+			height: auto;
 			padding: 4px;
-			background-color: lightpink;
+			/* background-color: lightpink; */
 			word-wrap: break-word;
 			word-break: normal;
 		}
-		#hamsterimg {
-			float: left;
-			width: 350px;
-			height: 250px;
-			background-color: lightpink;
+		.hamsterimg {
+			width: 100%;
+			height: auto;
+			/* background-color: lightpink; */
+			display: block;
 		}
 		#post_footer {
 			height: 80px;
 		    padding: 10px 70px;
-		    background-color: #5896D5;
+		    /* background-color: #5896D5; */
 		}
 		#user {
 			float: left;
 			height: 80px;
 			width: 600px;
-			background-color: #7250F0;
+			/* background-color: #7250F0; */
 		}
 		#diggit {
 			float: right;
@@ -80,7 +76,7 @@
 			height: 80px;
 			width: 100px;
 			margin-left: 10px;
-			background-color: #7250F0;
+			/* background-color: #7250F0; */
 		}
 		#opposenum, #recommendnum {
 			display: block;
@@ -110,61 +106,47 @@
 	</style>
 </head>
 <body>
-<% 
-	String title = ""; 
-	String content = ""; 
-	String[] hamster = new String[]{"","","",""};
-	title = request.getParameter("title");
-	content = request.getParameter("content");
-
-	boolean isMultipart = ServletFileUpload.isMultipartContent(request);//检查表单中是否包含文件
-	if(isMultipart) {
-		FileItemFactory factory = new DiskFileItemFactory();
-		ServletFileUpload upload = new ServletFileUpload(factory);
-		List items = upload.parseRequest(request);
-		for (int i=0; i<items.size(); i++) {
-			FileItem fi = (FileItem) items.get(i);
-			if(!fi.isFormField()) {
-				DiskFileItem dfi = (DiskFileItem) fi;
-				if(!dfi.getName().trim().equals("")) { //getName()返回文件名称或空串 
-					String fileName = application.getRealPath("/file")
-                            + System.getProperty("file.separator")             
-                            + FilenameUtils.getName(dfi.getName()); 
-					dfi.write(new File(fileName)); 
-					url_name = FilenameUtils.getName(dfi.getName());
-					url +=  url_name;
-				}
-			}
-		}
-	}
+    <%  
+        request.setCharacterEncoding("utf-8");
+        response.setCharacterEncoding("utf-8");
+        String note_title = "";
+        String note_content = "";
+        Note note = new NoteService().getOneNote(request, response);
+        if(note != null){
+        	note_title = note.getNote_title();
+        	note_content = note.getNote_content();
+        }
 	%>
 	<div id="header"></div>
 	<div id="wrapper">
 		<div id="title" style="border-bottom: solid 1px #9B9B9B;">
-			<a id="artitle" style="font-weight: bold;"><%=title%></a>
+			<a id="artitle" style="font-weight: bold;"><%=note_title%></a>
 		</div>
 
 		<div id="post_detail">	
 			<div id="artical">
-				<img src="<%=url%>" id="hamsterimg" name="hamsterimg" hspace="5"><%=content%>
+<!-- 				<img src="http://localhost:8080/final_item/file/note1_1.jpg" id="hamsterimg" name="hamsterimg" hspace="5"> -->
+				<p style="white-space: pre-wrap;"><%=note_content%></p>
 			</div>
 		</div>
 
 		<div id="post_footer">
 			<div id="user">
 				<p>
-					<img class="userimage" src="images/me.png">Seven
+					<img class="userimage" src="images/me.png">
+					<span class="user_info"><%=note.getUser_name()%> 仓鼠种类：<%=note.getRat_name() %>
+					</span>
 				</p>
 			</div>
 			<div id="diggit">
 				<div id="oppose">	
-					<p id="opposenum" >45</p>
+					<p id="opposenum"><%=note.getGood_num()%></p>
 					<p>
 					<img class="minimage" src="images/bad.png">反对
 					</p>	
 				</div>
 				<div id="recommend">
-					<p id="recommendnum" >45</p>
+					<p id="recommendnum"><%=note.getGood_num()%></p>
 					<p>
 					<img class="minimage" src="images/good.png">推荐
 					</p>

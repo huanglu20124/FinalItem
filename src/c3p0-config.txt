@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<c3p0-config>
+	<default-config>
+		<property name="driverClass">com.mysql.jdbc.Driver</property>
+		<property name="jdbcUrl">jdbc:mysql://119.23.229.19:3306/finalItem?useUnicode=true&amp;characterEncoding=utf-8
+		</property>
+		<property name="user">student</property>
+		<property name="password">137137lu</property>
+		<property name="maxPoolSize">100</property>
+		 
+		<property name="dbProperties">
+			<props>
+				<prop key="useUnicode">yes</prop>
+				<prop key="characterEncoding">utf8</prop>
+			</props>
+		</property>
+		<property name="testOnBorrow" value="true" />
+		<property name="testWhileIdle" value="true" />
+		<property name="testOnReturn" value="true" />
+		<property name="testConnectionOnCheckin">true</property>
+
+	</default-config>
+</c3p0-config>
+	
