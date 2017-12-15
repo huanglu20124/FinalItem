@@ -133,6 +133,7 @@
 				</div>
 			</div>
 		</main>
+		<jsp:include page="footer.jsp" flush="true" />
 	</div>
 	<script type="text/javascript">
 	   <% 

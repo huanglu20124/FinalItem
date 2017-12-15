@@ -13,8 +13,6 @@
 <%@page import="java.sql.ResultSet"%>
 <%@page import="java.sql.PreparedStatement"%>
 <%@page import="java.sql.Connection"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <%@ page import="com.finalItem.util.*" %>
 <%
 	request.setCharacterEncoding("utf-8");
@@ -41,12 +39,12 @@
 				</span>
 				<span class="logout"><a href="logout.jsp">退出</a></span>
 				<span style="margin-top: 5px">
-					<a href="person.jsp?user_id=<%=user.getUser_id()%>" style="margin-left: 1.5em;">
+					<a href="own.jsp" style="margin-left: 1.5em;">
 					<%=user_name %><img src="images/头像.png" style="height: 30px; margin-left: 1em;">
 					</a>
 				</span>
 			</span>
-			<img src="images/logo.png" style="height: 40px;" />
+			<a href="index.jsp" style="display:inline-block; height:40px; overflow:hidden;"><img src="images/hamsterLogo.jpg" style="height: 100%;" /></a>
 		</div>
 	</header>
 </body>
