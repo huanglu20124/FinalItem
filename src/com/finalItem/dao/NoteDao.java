@@ -213,4 +213,40 @@ public class NoteDao {
 		return null;
 	}
 
+	
+	public List<SimpleNote> getUserSimpleNotes(Integer user_id) {
+		String sql = "select a.note_id, a.user_id,a.note_title,a.note_content,a.note_time,a.note_uuid, "
+				+ " a.rat_id, c.rat_name, b.user_nickname"
+				+ "  from note a, user b, rat c where a.user_id=b.user_id and a.rat_id=c.rat_id"
+				+ " order by note_id "
+				+ " where user_id=?";
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;	
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			psm.setInt(1, user_id);
+			rs = psm.executeQuery();
+			List<SimpleNote>notes = new ArrayList<>();
+			while (rs.next()) {
+				SimpleNote simpleNote = new SimpleNote();
+				simpleNote.setNote_id(rs.getInt("note_id"));
+				simpleNote.setUser_id(rs.getInt("user_id"));
+				simpleNote.setUser_name(rs.getString("user_nickname"));
+				simpleNote.setNote_title(rs.getString("note_title"));
+				simpleNote.setNote_time(rs.getString("note_time"));
+				simpleNote.setNote_uuid(rs.getString("note_uuid"));
+				simpleNote.setRat_id(rs.getInt("rat_id"));
+				simpleNote.setRat_name(rs.getString("rat_name"));
+				notes.add(simpleNote);
+			}
+			return notes;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			DaoUtil.close(connection, psm, rs);
+		}
+		return null;
+	}
+
 }

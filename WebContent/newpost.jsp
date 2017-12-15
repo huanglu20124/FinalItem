@@ -129,8 +129,9 @@
         
         .rat_img{
              width: 100px;
-             height: 100px;
-             margin-left: 5px
+             height: auto;
+             margin-left: 5px;
+             
         }
         
         #rats{

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.tribes.group.ChannelCoordinator;
+import org.apache.el.parser.SimpleNode;
 
 import com.finalItem.dao.UserDao;
 import com.finalItem.domain.User;
@@ -106,4 +107,5 @@ public class UserService {
 		if(list == null) list = new ArrayList<>();
 		return list;
 	}
+
 }
