@@ -172,7 +172,7 @@
 			}
 			
 			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("post", "own.jsp", true);
+			xmlhttp.open("post", "post.jsp", true);
 			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			xmlhttp.onreadystatechange = function() {
 				if(xmlhttp.readyState == 4 && xmlhttp.status == "200") {
@@ -201,7 +201,7 @@
 			}
 			
 			var xmlhttp = new XMLHttpRequest();
-			xmlhttp.open("post", "own.jsp", true);
+			xmlhttp.open("post", "post.jsp", true);
 			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
 			xmlhttp.onreadystatechange = function() {
 				if(xmlhttp.readyState == 4 && xmlhttp.status == "200") {
