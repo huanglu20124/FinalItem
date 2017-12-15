@@ -30,19 +30,7 @@
 	<link rel="stylesheet" type="text/css" href="style/layout.css">
 </head>
 <body>
-	<header>
-		<div class="main_content">
-			<span class="header_span" style="display:inline-block; float: right;">
-				<span><a href="logout.jsp">退出登录</a></span>
-				<span style="margin-top: 5px">
-				<a href="person.jsp?user_id=<%=user.getUser_id()%>" style="margin-left: 1.5em;">
-				<%=user_name %><img src="images/头像.png" style="height: 30px; margin-left: 1em;">
-				</a>
-				</span>
-			</span>
-			<img src="images/logo.png" style="height: 40px;" />
-		</div>
-	</header>
+	<jsp:include page="header.jsp" flush="true" />
 	<div class="main_content">
 		<main>
 			<div class="left_main">
@@ -132,7 +120,9 @@
 					<p class="rank_hd">
 						<a>相关链接</a>
 					</p>
-					<img src="images/rat_ba.jpg" style="width: 100%;" />
+					<a style="width: 100%; display: inline-block; overflow: hidden;" href="http://tieba.baidu.com/f?kw=%B2%D6%CA%F3&fr=ala0&tpl=5">
+						<img src="images/rat_ba.jpg" style="width: 100%;" />
+					</a>
 				</div>
 			</div>
 		</main>
@@ -191,19 +181,23 @@
 
 			window.onload = function() {
 				slideImage();
-				for(var i = 0; i < span_.lenght; i++) {
+				for(var i = 0; i < span_.length; i++) {
+					// console.log("here");
 					span_[i].onclick = (function(temp_index) {
-						clearTimeout(slideTimeout);
-						for(var j = 0; j < span_.lenght; j++) {
-							if(hasClass(span_[j], "doc_hover")) {
-								removeClass(span_[j], "doc_hover");
+						console.log("here");
+						return function() {
+							clearTimeout(slideTimeout);
+							for(var j = 0; j < span_.length; j++) {
+								if(hasClass(span_[j], "doc_hover")) {
+									removeClass(span_[j], "doc_hover");
+								}
 							}
+							addClass(span_[temp_index], "doc_hover");
+							left_img.setAttribute("src", noteImg_array[temp_index].images[0]);
+							left_img_desc_content.innerHTML = noteImg_array[temp_index].note_title;
+							index = temp_index;
+							slideTimeout = setTimeout(slideImage, 4000);
 						}
-						addClass(span_[temp_index], "doc_hover");
-						left_img.setAttribute("src", noteImg_array[temp_index].images[0]);
-						left_img_desc_content.innerHTML = noteImg_array[temp_index].note_title;
-						index = temp_index;
-						slideTimeout = setTimeout(slideImage, 4000);
 					})(i);
 				}
 			}
