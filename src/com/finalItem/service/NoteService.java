@@ -102,7 +102,6 @@ public class NoteService {
 				for (int i = 0; i < items.size(); i++) {
 					FileItem fileItem = items.get(i);
 					if (fileItem.isFormField()) {
-						System.out.print("---" + fileItem.getFieldName());
 						// 如果是表单
 						switch (fileItem.getFieldName()) {
 						case "note_title":

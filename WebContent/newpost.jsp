@@ -178,6 +178,7 @@
 	                    List<String>images = (List<String>)session.getAttribute("images");
 	                    if(images != null){
 	                        for(String image : images){
+	                        	System.out.println(Const.FILE_IP + image);
 	                %>    	
 	                        <img class="rat_img" src="<%=Const.FILE_IP + image %>">
 	                <%	
