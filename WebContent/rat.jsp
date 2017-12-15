@@ -11,18 +11,23 @@
 	<head>
 		<meta charset="utf-8">
 		<title><%=rat.getRat_name()%></title>
+		<link rel="stylesheet" type="text/css" href="style/layout.css">
 		<style type="text/css">
-			body {background-color: rgb(244, 244, 244); font-family: "微软雅黑";}
+			/*body {background-color: rgb(244, 244, 244); font-family: "微软雅黑";} */
+			* {
+				line-height: 2em;
+			}
 			a {text-decoration: none; color: blue;}
 			#main {
-				width: 1000px; 
+				width: 1050px; 
 				overflow: hidden;
 				padding: 50px 30px;
 				background-color: white;
-				margin: 30px auto;
+				margin: 20px auto;
 			}
 			.introduction {
 				overflow: hidden;
+				margin-bottom: 20px;
 			}
 			.word {
 				width: 90%; 
@@ -32,10 +37,10 @@
 				padding: 0 10px;
 				line-height: 1.5em;
 			}
-			.word h1 {text-indent: 0;}
+			.word h1 {text-indent: 0; font-size:24px;}
 			.introduction .word {width: 70%;}
 			.image {
-				width: 20%;
+				width: 250px;
 				overflow: hidden;
 				display: inline-block;
 				//vertical-align: top;
@@ -129,7 +134,7 @@
 				display:inline-block;
 			}
 			.otherLink {
-				width: 20%;
+				width: 250px;
 				overflow:hidden;
 				display: inline-block;
 				position: fixed;
@@ -162,122 +167,123 @@
 		</style>
 	</head>
 	<body>
-		<div id="main">
-			
-			<div class="introduction">
-				<div class="word">
-					<h1><%=rat.getRat_name()%></h1>
-					<p><%=rat.getRat_description()%></p>
+		<jsp:include page="header.jsp" flush="true" />
+		<div class="main_content">
+			<main style="background-color:white; padding: 10px 20px;">
+				<div class="introduction">
+					<div class="word">
+						<h1><%=rat.getRat_name()%></h1>
+						<p><%=rat.getRat_description()%></p>
+					</div>
+					<div class="image">
+						<img src="<%=Const.FILE_IP + rat.getRat_head()%>">
+					</div>
 				</div>
-				<div class="image">
-					<img src="<%=Const.FILE_IP + rat.getRat_head()%>">
+				
+				<div class="outline">
+					<ul>
+						<li class="attrName">中文学名</li>
+						<li class="attrValue"><%=rat.getRat_name()%></li>
+						<li class="attrName">科</li>
+						<li class="attrValue">仓鼠科</li>
+					</ul>
+					<ul>
+						<li class="attrName">英文名</li>
+						<li class="attrValue">Syrian Hamster、Golden Hamster</li>
+						<li class="attrName">亚    科</li>
+						<li class="attrValue">仓鼠亚科</li>
+					</ul>
+					<ul>
+						<li class="attrName">别    称</li>
+						<li class="attrValue">珍珠熊、黄金地鼠、金仓鼠、金毛鼠、金丝仓鼠</li>
+						<li class="attrName">族</li>
+						<li class="attrValue">仓鼠</li>
+					</ul>
+					<ul>
+						<li class="attrName">界</li>
+						<li class="attrValue">动物界</li>
+						<li class="attrName">属</li>
+						<li class="attrValue">中仓鼠属</li>
+					</ul>
+					<ul>
+						<li class="attrName">门</li>
+						<li class="attrValue">脊索动物门</li>
+						<li class="attrName">种</li>
+						<li class="attrValue">仓鼠</li>
+					</ul>
+					<ul>
+						<li class="attrName">亚    门</li>
+						<li class="attrValue">脊椎动物亚门</li>
+						<li class="attrName">分布区域</li>
+						<li class="attrValue">原产于叙利亚、黎巴嫩、以色列</li>
+					</ul>
+					<ul>
+						<li class="attrName">纲</li>
+						<li class="attrValue">哺乳纲</li>
+						<li class="attrName">性    情</li>
+						<li class="attrValue">较温顺 </li>
+					</ul>
+					<ul>
+						<li class="attrName">亚    纲</li>
+						<li class="attrValue">真兽亚纲</li>
+						<li class="attrName">寿    命</li>
+						<li class="attrValue">2-3年</li>
+					</ul>
+					<ul>
+						<li class="attrName">目</li>
+						<li class="attrValue">啮齿目</li>
+						<li class="attrName">类</li>
+						<li class="attrValue">啮齿类</li>
+					</ul>
+					<ul>
+						<li class="attrName">亚    目</li>
+						<li class="attrValue">鼠形亚目</li>
+						<li class="attrName">天    敌</li>
+						<li class="attrValue">蛇、鹰等</li>
+					</ul>
 				</div>
-			</div>
-			
-			<div class="outline">
-				<ul>
-					<li class="attrName">中文学名</li>
-					<li class="attrValue"><%=rat.getRat_name()%></li>
-					<li class="attrName">科</li>
-					<li class="attrValue">仓鼠科</li>
-				</ul>
-				<ul>
-					<li class="attrName">英文名</li>
-					<li class="attrValue">Syrian Hamster、Golden Hamster</li>
-					<li class="attrName">亚    科</li>
-					<li class="attrValue">仓鼠亚科</li>
-				</ul>
-				<ul>
-					<li class="attrName">别    称</li>
-					<li class="attrValue">珍珠熊、黄金地鼠、金仓鼠、金毛鼠、金丝仓鼠</li>
-					<li class="attrName">族</li>
-					<li class="attrValue">仓鼠</li>
-				</ul>
-				<ul>
-					<li class="attrName">界</li>
-					<li class="attrValue">动物界</li>
-					<li class="attrName">属</li>
-					<li class="attrValue">中仓鼠属</li>
-				</ul>
-				<ul>
-					<li class="attrName">门</li>
-					<li class="attrValue">脊索动物门</li>
-					<li class="attrName">种</li>
-					<li class="attrValue">仓鼠</li>
-				</ul>
-				<ul>
-					<li class="attrName">亚    门</li>
-					<li class="attrValue">脊椎动物亚门</li>
-					<li class="attrName">分布区域</li>
-					<li class="attrValue">原产于叙利亚、黎巴嫩、以色列</li>
-				</ul>
-				<ul>
-					<li class="attrName">纲</li>
-					<li class="attrValue">哺乳纲</li>
-					<li class="attrName">性    情</li>
-					<li class="attrValue">较温顺 </li>
-				</ul>
-				<ul>
-					<li class="attrName">亚    纲</li>
-					<li class="attrValue">真兽亚纲</li>
-					<li class="attrName">寿    命</li>
-					<li class="attrValue">2-3年</li>
-				</ul>
-				<ul>
-					<li class="attrName">目</li>
-					<li class="attrValue">啮齿目</li>
-					<li class="attrName">类</li>
-					<li class="attrValue">啮齿类</li>
-				</ul>
-				<ul>
-					<li class="attrName">亚    目</li>
-					<li class="attrValue">鼠形亚目</li>
-					<li class="attrName">天    敌</li>
-					<li class="attrValue">蛇、鹰等</li>
-				</ul>
-			</div>
-			<div class="catalog">
-				<div class="col1">目录</div>
-				<ol>
-					<div class="col2">
-						<li><a href="#waixing">外形特征</a></li>
-						<li><a href="#shenghuo">生活习性</a></li>
-						<li><a href="#fenbu">分布范围</a></li>
-						<li><a href="#pinzhong">常见品种</a></li>
-					</div>
-					<div class="col3">
-						<li><a href="#shengzhang">生长繁殖</a></li>
-						<li><a href="#zhongqun">种群现状</a></li>
-						<li><a href="#rengong">人工饲养</a></li>
-					</div>
-				</ol>
-			</div>
-			<div class="otherLink">
-				<p>其他仓鼠</p>
-				<ul>
-					<div class="row">
-						<li><a href="rat.jsp?rat_id=1">三线</a></li>
-						<li><a href="rat.jsp?rat_id=2">银狐</a></li>
-					</div>
-					<div class="row">
-						<li><a  href="rat.jsp?rat_id=3">布丁</a></li>
-						<li><a  href="rat.jsp?rat_id=4">紫仓</a></li>
-					</div>
-					<div class="row">
-						<li><a href="rat.jsp?rat_id=5">老公公</a></li>
-						<li><a  href="rat.jsp?rat_id=6">老婆婆</a></li>
-					</div>
-					<div class="row">
-						<li><a href="rat.jsp?rat_id=7">金丝熊</a></li>
-						<li><a href="rat.jsp?rat_id=8">虎纹熊</a></li>
-					</div>
-					<div class="row">
-						<li><a href="rat.jsp?rat_id=9">白熊</a></li>
-						<li><a href="rat.jsp?rat_id=10">黑熊</a></li>
-					</div>			
-				</ul>
-			</div>
-			<div class="detail">
+				<div class="catalog">
+					<div class="col1">目录</div>
+					<ol>
+						<div class="col2">
+							<li><a href="#waixing">外形特征</a></li>
+							<li><a href="#shenghuo">生活习性</a></li>
+							<li><a href="#fenbu">分布范围</a></li>
+							<li><a href="#pinzhong">常见品种</a></li>
+						</div>
+						<div class="col3">
+							<li><a href="#shengzhang">生长繁殖</a></li>
+							<li><a href="#zhongqun">种群现状</a></li>
+							<li><a href="#rengong">人工饲养</a></li>
+						</div>
+					</ol>
+				</div>
+				<div class="otherLink">
+					<p>其他仓鼠</p>
+					<ul>
+						<div class="row">
+							<li><a href="rat.jsp?rat_id=1">三线</a></li>
+							<li><a href="rat.jsp?rat_id=2">银狐</a></li>
+						</div>
+						<div class="row">
+							<li><a  href="rat.jsp?rat_id=3">布丁</a></li>
+							<li><a  href="rat.jsp?rat_id=4">紫仓</a></li>
+						</div>
+						<div class="row">
+							<li><a href="rat.jsp?rat_id=5">老公公</a></li>
+							<li><a  href="rat.jsp?rat_id=6">老婆婆</a></li>
+						</div>
+						<div class="row">
+							<li><a href="rat.jsp?rat_id=7">金丝熊</a></li>
+							<li><a href="rat.jsp?rat_id=8">虎纹熊</a></li>
+						</div>
+						<div class="row">
+							<li><a href="rat.jsp?rat_id=9">白熊</a></li>
+							<li><a href="rat.jsp?rat_id=10">黑熊</a></li>
+						</div>			
+					</ul>
+				</div>
+				<div class="detail">
 				<div id="waixing" class="detailContents">
 					<div class="title">外形特征 <hr/></div>
 					<div class="contents">
@@ -321,6 +327,9 @@
 					</div>
 				</div>						
 			</div>
+			</main>
+			<jsp:include page="footer.jsp" flush="true" />
 		</div>
+
 	</body>
 </html>

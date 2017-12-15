@@ -12,10 +12,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="style/layout.css">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<title>详情页</title>
 	<style type="text/css">
-		html {
+		/* html {
                 height:100%;
                 width: 100%;
                 margin: 0;
@@ -25,14 +26,13 @@
         }
         body {
         	width: 1050px;
-        	/* height: 100%; */
+        	height: 100%; 
         	margin: 0 auto;
         	background-color:#FFFFFF;
-        }
+        }*/
         #title {
 			padding: 20px 70px;
 			text-align: left;
-			height: 20px;
 			font-style: bold; 
 			font-size:  30px;
 			/*background-color: gray;*/
@@ -57,14 +57,15 @@
 			display: block;
 		}
 		#post_footer {
-			height: 80px;
+			/* height: 80px; */
 		    padding: 10px 70px;
 		    /* background-color: #5896D5; */
+		    overflow:hidden;
 		}
 		#user {
 			float: left;
 			height: 80px;
-			width: 600px;
+			width: 400px;
 			/* background-color: #7250F0; */
 		}
 		#diggit {
@@ -117,10 +118,11 @@
         	note_content = note.getNote_content();
         }
 	%>
-	<div id="header"></div>
-	<div id="wrapper">
-		<div id="title" style="border-bottom: solid 1px #9B9B9B;">
-			<a id="artitle" style="font-weight: bold;"><%=note_title%></a>
+	<jsp:include page="header.jsp" flush="true" />
+	<div class="main_content">
+		<main style="padding: 20px 30px; background-color:white; overflow:hidden;">
+		<div id="title" style="border-bottom: solid 1px #9B9B9B; padding: 10px 0px;">
+			<a id="artitle" style="font-weight: bold; font-size:16px; line-height: 2em;"><%=note_title%></a>
 		</div>
 
 		<div id="post_detail">	
@@ -139,13 +141,13 @@
 				</p>
 			</div>
 			<div id="diggit">
-				<div id="oppose">	
+				<div id="oppose" onclick="opposefunc(<%=note.getNote_id()%>, <%=note.getRat_id()%>, 1)" style="cursor:pointer;">	
 					<p id="opposenum"><%=note.getGood_num()%></p>
 					<p>
 					<img class="minimage" src="images/bad.png">反对
 					</p>	
 				</div>
-				<div id="recommend">
+				<div id="recommend" onclick="recommendfunc(<%=note.getNote_id()%>, <%=note.getRat_id()%>, 0)" style="cursor:pointer;">
 					<p id="recommendnum"><%=note.getGood_num()%></p>
 					<p>
 					<img class="minimage" src="images/good.png">推荐
@@ -154,8 +156,67 @@
 				
 			</div>
 		</div>
-	
+		</main>
+		<jsp:include page="footer.jsp" flush="true" />
 	</div>
-	<div id="footer"></div>
+	<script type="text/javascript">
+		function opposefunc(note_id, rat_id, type) {
+			var data = {
+				note_id : note_id,
+				rat_id: rat_id,
+				type: type
+			}
+			var send_data = "";
+			for(var temp_index in data ){
+				send_data += temp_index + "=" + data[temp_index] + "&";
+			}
+			
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("post", "post.jsp", true);
+			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.readyState == 4 && xmlhttp.status == "200") {
+					console.log("success");
+					var opposenum = document.getElementById("opposenum");
+					var num = parseInt(opposenum.innerHTML);
+					num ++;
+					opposenum.innerHTML = num;
+				} else {
+					console.log(xmlhttp.readyState);
+				}
+			}
+			console.log(send_data.substring(0, send_data.length-1));
+			xmlhttp.send(send_data.substring(0, send_data.length-1));
+		}
+		
+		function recommendfunc(note_id, rat_id, type) {
+			var data = {
+				note_id : note_id,
+				rat_id: rat_id,
+				type: type
+			}
+			var send_data = "";
+			for(var temp_index in data ){
+				send_data += temp_index + "=" + data[temp_index] + "&";
+			}
+			
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.open("post", "post.jsp", true);
+			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			xmlhttp.onreadystatechange = function() {
+				if(xmlhttp.readyState == 4 && xmlhttp.status == "200") {
+					console.log("success");
+					var recommendnum = document.getElementById("recommendnum");
+					var num = parseInt(recommendnum.innerHTML);
+					num ++;
+					recommendnum.innerHTML = num;
+				} else {
+					console.log(xmlhttp.readyState);
+				}
+			}
+			console.log(send_data.substring(0, send_data.length-1));
+			xmlhttp.send(send_data.substring(0, send_data.length-1));
+		}
+	</script>
 </body>
 </html>

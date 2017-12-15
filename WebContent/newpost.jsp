@@ -11,22 +11,11 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" type="text/css" href="style/layout.css">
 <title>发表新帖</title>
 <style type="text/css">
-		<style type="text/css">
-	html {
-                height:100%;
-                width: 100%;
-                margin: 0;
-                padding: 0;
-                font-family: Microsoft YaHei, Consolas;
-                background-color: #F4F4F4;
-        }
-        body {
-        	width: 1050px;
-        	height: 100%;
-        	margin: 0 auto;
-        }
+<style type="text/css">
+		
         form {
         	padding: 20px 70px;
             height: 700px;
@@ -166,42 +155,46 @@
     	   }
        }
      %>
-	<div id="header"></div>
-	<form action="newpost.jsp" method="post" enctype="multipart/form-data">
-		<p>发表新帖</p>
-		<p>标题： <input type="text" id="title" name="note_title" value="<%=note_title%>"></input></p>
-		       <input type="hidden" name="user_id" value="<%=user.getUser_id()%>">
-                                                仓鼠品种：<select id="hamster" name="rat_id">
-                 <%for(int i = 0; i < rat_list.size(); i++) 
-                   {
-                	  Rat rat = rat_list.get(i);
-                    %>
-                        <option value="<%=rat.getRat_id()%>"   <%=rat_selects[i]%>><%=rat.getRat_name() %></option>
-                  <%}%>
-                </select>
-                <a class="load">选择图片<input type="file" id="photo" name="photo" value="浏览..."></input>
-                </a>
-                <button  type="submit" name="uploadFile" value="上传图片">上传</button>
-                <div id="rats">
-                <% 
-                    List<String>images = (List<String>)session.getAttribute("images");
-                    if(images != null){
-                        for(String image : images){
-                %>    	
-                        <img class="rat_img" src="<%=Const.FILE_IP + image %>">
-                <%	
-                        }
-                    }
-                %>
-                </div>
-                <br>
-                <label for="content">内容：</label>
-                <textarea id="content" type="text" name="note_content"><%=note_content%></textarea> 
-		        <br><br>
-		        <button  type="submit" name="save" value="发表">发表</button>
-                <button type="submit" name="exit" value="退出">退出</button>
-		
-	</form>
-    <div id="footer"></div>
+	<jsp:include page="header.jsp" flush="true" />
+	<div class="main_content">
+		<main>
+		<form action="newpost.jsp" method="post" enctype="multipart/form-data" style="padding:0px 80px;">
+			<p>发表新帖</p>
+			<p>标题： <input type="text" id="title" name="note_title" value="<%=note_title%>" style="margin: 20px 0px;"></input></p>
+			       <input type="hidden" name="user_id" value="<%=user.getUser_id()%>">
+	                                                仓鼠品种：<select id="hamster" name="rat_id">
+	                 <%for(int i = 0; i < rat_list.size(); i++) 
+	                   {
+	                	  Rat rat = rat_list.get(i);
+	                    %>
+	                        <option value="<%=rat.getRat_id()%>"   <%=rat_selects[i]%>><%=rat.getRat_name() %></option>
+	                  <%}%>
+	                </select>
+	                <a class="load">选择图片<input type="file" id="photo" name="photo" value="浏览..."></input>
+	                </a>
+	                <button  type="submit" name="uploadFile" value="上传图片">上传</button>
+	                <div id="rats">
+	                <% 
+	                    List<String>images = (List<String>)session.getAttribute("images");
+	                    if(images != null){
+	                        for(String image : images){
+	                %>    	
+	                        <img class="rat_img" src="<%=Const.FILE_IP + image %>">
+	                <%	
+	                        }
+	                    }
+	                %>
+	                </div>
+	                <br>
+	                <label for="content">内容：</label>
+	                <textarea id="content" type="text" name="note_content"><%=note_content%></textarea> 
+			        <br><br>
+			        <button  type="submit" name="save" value="发表">发表</button>
+	                <button type="submit" name="exit" value="退出">退出</button>
+			
+		</form>
+		</main>
+    <jsp:include page="footer.jsp" flush="true"/>
+    </div>>
 </body>
 </html>

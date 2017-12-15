@@ -69,19 +69,12 @@
 						int pgprev = (pgno > 0) ? pgno - 1 : 0;
 						int pgnext = pgno + 1;
 				    %>
-	                <div class="page_foot">
-	                    <%if(pgno != 0)
-	                      {
-	                    %>
-						<span class="left_page"><a href="index.jsp?page=<%=pgprev%>"><<</a></span>
-						<%}%>
+	                <div class="page_foot" style="margin-bottom: 20px;">
+						<span class="left_page"><a href="index.jsp?page=<%= (pgprev == 0? pgno : pgprev)%>"><<</a></span>
 						<span class="page_desc">
 							当前页数 <span class="cur_page"><%=pgno+1%></span>/<span class="all_page"><%=session.getAttribute("page_sum")%></span>
 						</span>
-						<%if(pgnext != ((int)session.getAttribute("page_sum")))
-						   {%>
-						<span class="right_page"><a href="index.jsp?page=<%=pgnext%>">>></a></span>
-						<%}%>
+						<span class="right_page"><a href="index.jsp?page=<%=(pgnext == ((int)session.getAttribute("page_sum")) ? pgno : pgnext )%>">>></a></span>
 					</div>
 				</div>
 			</div>
@@ -127,12 +120,13 @@
 					<p class="rank_hd">
 						<a>相关链接</a>
 					</p>
-					<a style="width: 100%; display: inline-block; overflow: hidden;" href="http://tieba.baidu.com/f?kw=%B2%D6%CA%F3&fr=ala0&tpl=5">
+					<a style="width: 100%; display: inline-block; overflow: hidden;" href="http://tieba.baidu.com/f?kw=%B2%D6%CA%F3&fr=ala0&tpl=5" target="_blank">
 						<img src="images/rat_ba.jpg" style="width: 100%;" />
 					</a>
 				</div>
 			</div>
 		</main>
+		<jsp:include page="footer.jsp" flush="true" />
 	</div>
 	<script type="text/javascript">
 	   <% 
