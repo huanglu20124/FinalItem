@@ -45,6 +45,7 @@ public class NoteService {
 		} else {
 			notes = new ArrayList<>();
 		}
+		System.out.println(notes.size());
 		return notes;
 	}
 
@@ -135,8 +136,8 @@ public class NoteService {
 							DiskFileItem fi = (DiskFileItem) fileItem;
 							if (!fi.getName().trim().equals("")) {// getName()返回文件名称或空串
 								String id = UUID.randomUUID().toString().substring(0, 10);
-								//String filePath = context.getRealPath("/file") + System.getProperty("file.separator")+ id + "_" + FilenameUtils.getName(fi.getName());
-								String filePath = Const.FILE_PATH + id + "_" + FilenameUtils.getName(fi.getName()); 
+								String filePath = context.getRealPath("/file") + System.getProperty("file.separator")+ id + "_" + FilenameUtils.getName(fi.getName());
+								//String filePath = Const.FILE_PATH + id + "_" + FilenameUtils.getName(fi.getName()); 
 								fi.write(new File(filePath));
 								image_url = id + "_" + FilenameUtils.getName(fi.getName());
 							}

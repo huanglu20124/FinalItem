@@ -2,6 +2,7 @@ package com.finalItem.service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import javax.print.attribute.standard.RequestingUserName;
@@ -81,6 +82,7 @@ public class UserService {
 				}
 				try {
 					response.sendRedirect("/final_item/index.jsp?page=0");
+					System.out.println("登录成功");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -113,15 +115,25 @@ public class UserService {
 
 	public String setUserInfo(HttpServletRequest request, HttpServletResponse response){
 		//先从session里获取本人原来的信息
+/*		Enumeration<String>enumeration = request.getParameterNames();
+		while (enumeration.hasMoreElements()) {
+			String string = (String) enumeration.nextElement();
+			System.out.println(string);
+		}*/
 		User user = (User)request.getSession().getAttribute("user");
 		String user_nickname = request.getParameter("user_nickname");
 		String telephone = request.getParameter("telephone");
 		String email = request.getParameter("email");
+		String sex = request.getParameter("sex");
 		if(user_nickname != null) user.setUser_nickname(user_nickname);
 		if(telephone != null)  user.setTelephone(telephone);
 		if(email != null) user.setEmail(email);
+		if(sex != null) user.setSex(sex);
 		int update_ans = userDao.updateUser(user);
 		if(update_ans == 0) return "修改失败";
-		else return "修改成功";
+		else {
+			request.getSession().setAttribute("user", user);
+			return "修改成功";
+		}
 	}
 }
