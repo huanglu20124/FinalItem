@@ -123,7 +123,8 @@ public class UserDao {
 
 	
     public int updateUser(User user) {
-		String sql = "update user set "
+    	System.out.println(user.getUser_nickname() + "--" + user.getEmail() + "--" + user.getTelephone() + "---" + user.getSex() + "--" + user.getUser_id());
+		String sql = "update user set " 
 				+ "user_nickname=?, sex=?, telephone=?,email=?"
 				+ " where user_id=?";
 		Connection connection = null;

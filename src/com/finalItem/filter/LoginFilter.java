@@ -33,7 +33,6 @@ public class LoginFilter implements Filter{
 				System.out.println("重定向到登录界面");
 			}else {
 				chain.doFilter(request, response);
-				System.out.println("登录成功");
 			}
 		}	
 	}
