@@ -45,6 +45,7 @@ public class NoteService {
 		} else {
 			notes = new ArrayList<>();
 		}
+		System.out.println(notes.size());
 		return notes;
 	}
 

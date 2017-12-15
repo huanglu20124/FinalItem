@@ -35,7 +35,7 @@
 		<main>
 			<div class="left_main">
 				<div class="left_img_container">
-					<img src="images/麦田.jpg" style="width: 100%;" id="left_img"/>
+					<a style="display:inline-block; width:100%; cursor:pointer;" id="left_img_a"><img src="images/麦田.jpg" style="width: 100%;" id="left_img"/></a>
 					<div class="left_img_desc">
 						<p class="left_img_desc_content">连黄牛都玩AI了 春节抢票不加钱回不了家了</p>
 						<span></span><span></span><span></span><span></span><span></span>
@@ -70,7 +70,7 @@
 						int pgnext = pgno + 1;
 				    %>
 	                <div class="page_foot" style="margin-bottom: 20px;">
-						<span class="left_page"><a href="index.jsp?page=<%= (pgprev == 0? pgno : pgprev)%>"><<</a></span>
+						<span class="left_page"><a href="index.jsp?page=<%=pgprev%>"><<</a></span>
 						<span class="page_desc">
 							当前页数 <span class="cur_page"><%=pgno+1%></span>/<span class="all_page"><%=session.getAttribute("page_sum")%></span>
 						</span>
@@ -169,6 +169,7 @@
 			// 改变图片和内容
 			function slideImage() {
 				left_img.setAttribute("src", noteImg_array[index].images[0]);
+				left_img.parentNode.href = "post.jsp?note_id="+noteImg_array[index].note_id;
 				left_img_desc_content.innerHTML = noteImg_array[index].note_title;
 				for(var i = 0; i < 5; i++) {
 					if(hasClass(span_[i], "doc_hover")) {
@@ -195,6 +196,7 @@
 							}
 							addClass(span_[temp_index], "doc_hover");
 							left_img.setAttribute("src", noteImg_array[temp_index].images[0]);
+							left_img.parentNode.href = "post.jsp?note_id="+noteImg_array[temp_index].note_id;
 							left_img_desc_content.innerHTML = noteImg_array[temp_index].note_title;
 							index = temp_index;
 							slideTimeout = setTimeout(slideImage, 4000);
