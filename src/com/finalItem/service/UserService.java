@@ -4,16 +4,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.print.attribute.standard.RequestingUserName;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.tribes.group.ChannelCoordinator;
+import org.apache.el.parser.SimpleNode;
 
 import com.finalItem.dao.UserDao;
 import com.finalItem.domain.User;
 import com.finalItem.util.TimeUtil;
+
+import sun.applet.resources.MsgAppletViewer;
 
 public class UserService {
 	private UserDao userDao = new UserDao();
@@ -105,5 +109,19 @@ public class UserService {
 		List<User> list = userDao.getUserGoodRank();
 		if(list == null) list = new ArrayList<>();
 		return list;
+	}
+
+	public String setUserInfo(HttpServletRequest request, HttpServletResponse response){
+		//先从session里获取本人原来的信息
+		User user = (User)request.getSession().getAttribute("user");
+		String user_nickname = request.getParameter("user_nickname");
+		String telephone = request.getParameter("telephone");
+		String email = request.getParameter("email");
+		if(user_nickname != null) user.setUser_nickname(user_nickname);
+		if(telephone != null)  user.setTelephone(telephone);
+		if(email != null) user.setEmail(email);
+		int update_ans = userDao.updateUser(user);
+		if(update_ans == 0) return "修改失败";
+		else return "修改成功";
 	}
 }
