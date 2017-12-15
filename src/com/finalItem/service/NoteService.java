@@ -50,9 +50,8 @@ public class NoteService {
 		// 根据时间顺序分页查询帖子(包含标题 作者 时间 id等文字内容s),5条
 		List<SimpleNote> notes = null;
 		String page_str = request.getParameter("page");
-		if (page_str != null) {
-			notes = noteDao.getSimpleNotes(page_str);
-		}
+		if(page_str == null) page_str = "0";
+		notes = noteDao.getSimpleNotes(page_str);
 		if (notes == null) {
 			notes = new ArrayList<>();
 		}
@@ -134,8 +133,8 @@ public class NoteService {
 							DiskFileItem fi = (DiskFileItem) fileItem;
 							if (!fi.getName().trim().equals("")) {// getName()返回文件名称或空串
 								String id = UUID.randomUUID().toString().substring(0, 10);
-								String filePath = context.getRealPath("/file") + System.getProperty("file.separator")
-										+ id + "_" + FilenameUtils.getName(fi.getName());
+								String filePath = context.getRealPath("/file") + System.getProperty("file.separator")+ id + "_" + FilenameUtils.getName(fi.getName());
+								//String filePath = Const.FILE_PATH + id + "_" + FilenameUtils.getName(fi.getName()); 
 								fi.write(new File(filePath));
 								image_url = id + "_" + FilenameUtils.getName(fi.getName());
 							}

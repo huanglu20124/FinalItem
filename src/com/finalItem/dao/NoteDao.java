@@ -74,14 +74,14 @@ public class NoteDao {
 				+ " a.rat_id, c.rat_name, b.user_nickname"
 				+ "  from note a, user b, rat c where a.user_id=b.user_id and a.rat_id=c.rat_id"
 				+ " order by note_id"
-				+ " desc limit ?,3";
+				+ " desc limit ?,5";
 		Connection connection = null;
 		PreparedStatement psm = null;
 		ResultSet rs = null;	
 		try {
 			connection = dataSource.getConnection();
 			psm = connection.prepareStatement(sql);
-			psm.setInt(1, new Integer(page_str)*3);
+			psm.setInt(1, new Integer(page_str)*5);
 			rs = psm.executeQuery();
 			List<SimpleNote>notes = new ArrayList<>();
 			while (rs.next()) {
@@ -202,7 +202,9 @@ public class NoteDao {
 			rs = psm.executeQuery();
 			while(rs.next()){
 				Integer sum = rs.getInt(1);
-				return (sum/3) + 1;
+				Integer temp = sum/5;
+				if(sum%5 == 0 ) return temp;
+				else return (sum/5) + 1;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

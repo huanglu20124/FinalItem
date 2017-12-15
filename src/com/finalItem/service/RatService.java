@@ -16,7 +16,15 @@ public class RatService {
 		//返回9只热门仓鼠
 		List<Rat>list = ratDao.getHotRats();
 		if(list == null) list = new ArrayList<>();
-		return list;
-		
+		return list;		
 	}
+	
+	public Rat getOneRatById(HttpServletRequest request, HttpServletResponse response){
+		Integer rat_id = new Integer(request.getParameter("rat_id"));
+		//返回一个仓鼠
+		Rat rat = ratDao.getOneRat(rat_id);
+		if(rat == null) rat = new Rat();
+		return rat;
+	}
+
 }

@@ -50,7 +50,7 @@
 					  SimpleNote note = simpleNotes.get(i);
 				%>
 					<div class="left_note">
-						<p class="note_hd"><a href="detail.jsp?note_id=<%=note.getNote_id()%>"><%=note.getNote_title()%></a></p>
+						<p class="note_hd"><a href="post.jsp?note_id=<%=note.getNote_id()%>"><%=note.getNote_title()%></a></p>
 						<div class="note_desc">
 							<img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;">
 							<span><%=note.getUser_name()%></span>
@@ -70,11 +70,18 @@
 						int pgnext = pgno + 1;
 				    %>
 	                <div class="page_foot">
+	                    <%if(pgno != 0)
+	                      {
+	                    %>
 						<span class="left_page"><a href="index.jsp?page=<%=pgprev%>"><<</a></span>
+						<%}%>
 						<span class="page_desc">
-							当前页数 <span class="cur_page"><%=param%></span>/<span class="all_page"><%=session.getAttribute("page_sum")%></span>
+							当前页数 <span class="cur_page"><%=pgno+1%></span>/<span class="all_page"><%=session.getAttribute("page_sum")%></span>
 						</span>
+						<%if(pgnext != ((int)session.getAttribute("page_sum")))
+						   {%>
 						<span class="right_page"><a href="index.jsp?page=<%=pgnext%>">>></a></span>
+						<%}%>
 					</div>
 				</div>
 			</div>
@@ -89,7 +96,7 @@
 					   {
 						   Rat rat = rat_list.get(i);
 					   %>
-						<p><a href="rat.jsp?<%=rat.getRat_id()%>"><%=rat.getRat_name() %>  | <%=rat.getRat_description().substring(0,15)%></a></p>
+						<p><a href="rat.jsp?rat_id=<%=rat.getRat_id()%>"><%=rat.getRat_name() %>  | <%=rat.getRat_description().substring(0,15)%></a></p>
 					   <%}%>
 					</div>
 				</div>
