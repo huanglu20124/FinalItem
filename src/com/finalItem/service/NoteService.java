@@ -174,7 +174,7 @@ public class NoteService {
 					}
 
 					//实际内容加上真标签
-					String add_str = "<br><img class='hamsterimg' src='"+Const.FILE_IP + image_url + "'><br>";
+					String add_str = "<br><img class='hamsterimg' src='"+ "file/" + image_url + "'><br>";
 					content += add_str;
 					length += add_str.length();
 					

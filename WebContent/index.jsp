@@ -107,7 +107,7 @@
 					        	String honour = Const.honours[i];
 					    %>
 						<p class="rank_list_item">
-						    <a href="person.jsp?user_id=<%=oneUser.getUser_id()%>">
+						    <a href="rat.jsp?user_id=<%=oneUser.getUser_id()%>">
 						       	<span><img src="images/头像.png" class="flex-none" style="height: 20px; width: auto;"></span>
 							    <span style="margin-left: 1em; color: black;"><%=oneUser.getUser_nickname()%></span>
 						    </a>
