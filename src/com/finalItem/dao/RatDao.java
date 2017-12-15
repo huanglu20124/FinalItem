@@ -66,5 +66,46 @@ public class RatDao {
 		}
 		return null;
 	}
+
+
+	
+	public int addRatGood(Integer rat_id) {
+		String sql = "update rat set good_num=good_num+1 where rat_id=?";
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			psm.setInt(1, rat_id);
+			psm.executeUpdate();
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			DaoUtil.close(connection, psm, rs);
+		}
+	}
+	
+	public int minusRatGood(Integer rat_id) {
+		String sql = "update rat set good_num=good_num-1 where rat_id=?";
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			psm.setInt(1, rat_id);
+			psm.executeUpdate();
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			DaoUtil.close(connection, psm, rs);
+		}
+		
+	}
 	
 }

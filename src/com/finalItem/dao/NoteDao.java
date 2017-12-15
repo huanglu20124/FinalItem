@@ -249,4 +249,62 @@ public class NoteDao {
 		return null;
 	}
 
+	
+	public int addNoteGood(Integer note_id) {
+		String sql = "update note set note_good=note_good+1 where note_id=?";
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			psm.setInt(1, note_id);
+			psm.executeUpdate();
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			DaoUtil.close(connection, psm, rs);
+		}
+	}
+
+	public int minusNoteGood(Integer note_id) {
+		String sql = "update note set note_good=note_good-1 where note_id=?";
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			psm.setInt(1, note_id);
+			psm.executeUpdate();
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			DaoUtil.close(connection, psm, rs);
+		}
+	}
+
+	
+	public int deleteNote(Integer note_id) {
+		String sql = "delete from  note where note_id=?";
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet rs = null;
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			psm.setInt(1, note_id);
+			psm.executeUpdate();
+			return 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			DaoUtil.close(connection, psm, rs);
+		}
+	}
 }
