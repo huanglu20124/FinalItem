@@ -36,7 +36,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <% 
     if(request.getMethod().equalsIgnoreCase("post")){
-    	new UserService().setUserInfo(request, response);
+    	//处理ajax
+    	if(request.getParameter("note_id") != null){
+    		//删除
+    		new NoteService().deleteNote(new Integer(request.getParameter("note_id")));
+    	}else{
+    		//修改用户信息
+    		new UserService().setUserInfo(request, response);
+    	}
+    	
     }
 %>
 <html>

@@ -10,6 +10,16 @@
 <%@ page import="org.apache.commons.fileupload.servlet.*"%> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%
+    if(request.getMethod().equalsIgnoreCase("post")){
+    	if(request.getParameter("rat_id") != null){
+    		Integer note_id = new Integer(request.getParameter("note_id"));
+    		Integer rat_id = new Integer(request.getParameter("rat_id"));
+    		String type = request.getParameter("type");
+    		new NoteService().addGood(note_id, rat_id, type);
+    	}
+    }
+%>
 <html>
 <head>
 <link rel="stylesheet" type="text/css" href="style/layout.css">

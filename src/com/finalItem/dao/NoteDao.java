@@ -218,8 +218,8 @@ public class NoteDao {
 		String sql = "select a.note_id, a.user_id,a.note_title,a.note_content,a.note_time,a.note_uuid, "
 				+ " a.rat_id, c.rat_name, b.user_nickname"
 				+ "  from note a, user b, rat c where a.user_id=b.user_id and a.rat_id=c.rat_id"
-				+ " order by note_id "
-				+ " where user_id=?";
+				+ " and b.user_id=?"
+				+ " order by a.note_id ";
 		Connection connection = null;
 		PreparedStatement psm = null;
 		ResultSet rs = null;	

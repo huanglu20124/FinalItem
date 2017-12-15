@@ -271,6 +271,7 @@ public class NoteService {
 	}
 
 	public String addGood(Integer note_id,Integer rat_id,String type){
+		System.out.println("type=" + type);
 		if(type.equals("0")){
 			//增加
 			noteDao.addNoteGood(note_id);
@@ -278,7 +279,7 @@ public class NoteService {
 		}else {
 			//减少
 			noteDao.minusNoteGood(note_id);
-			ratDao.minusRatGood(note_id);
+			ratDao.minusRatGood(rat_id);
 		}
 		return "修改成功";
 	}
