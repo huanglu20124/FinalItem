@@ -120,4 +120,29 @@ public class UserDao {
 			DaoUtil.close(connection, psm, resultSet);
 		}
 	}
+
+	
+    public int updateUser(User user) {
+		String sql = "update user set "
+				+ "user_nickname=?, sex=?, telephone=?,email=?"
+				+ " where user_id=?";
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet resultSet = null;	
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			psm.setString(1, user.getUser_nickname());
+			psm.setString(2, user.getSex());
+			psm.setString(3, user.getTelephone());
+			psm.setString(4, user.getEmail());
+			psm.setInt(5, user.getUser_id());
+			return psm.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}finally {
+			DaoUtil.close(connection, psm, resultSet);
+		}
+	}
 }
