@@ -17,7 +17,7 @@ header {
 	height: 60px;
 }
 
-.header_span span, .header_span img {
+.header_span span, .header_span img, .header_span a {
 	display: inline-block;
 	vertical-align: middle;
 }

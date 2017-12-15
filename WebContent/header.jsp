@@ -34,10 +34,10 @@
 	<header>
 		<div class="main_content">
 			<span class="header_span" style="display:inline-block; float: right;">
-				<span style="width: 25px; height: 25px; border-radius: 50%; background-color: rgb(217,49,30); overflow: hidden; text-align: center; margin-right: 20px; cursor: pointer;" title="发布帖子">
+				<a href="newpost.jsp" style="display:inline-block; width: 25px; height: 25px; border-radius: 50%; background-color: rgb(217,49,30); overflow: hidden; text-align: center; margin-right: 20px; cursor: pointer;" title="发布帖子">
 					<img src="images/edit.png" style="width: 15px; height: 15px; margin-top: 3px;" />
-				</span>
-				<span class="logout"><a href="logout.jsp">退出</a></span>
+				</a>
+				<span class="logout"><a href="login.jsp">退出</a></span>
 				<span style="margin-top: 5px">
 					<a href="own.jsp" style="margin-left: 1.5em;">
 					<%=user_name %><img src="images/头像.png" style="height: 30px; margin-left: 1em;">
