@@ -39,5 +39,32 @@ public class RatDao {
 		}
 		return null;
 	}
+
+	
+	public Rat getOneRat(Integer rat_id) {
+		String sql = "select * from rat where rat_id=?";
+		Connection connection = null;
+		PreparedStatement psm = null;
+		ResultSet resultSet = null;	
+		try {
+			connection = dataSource.getConnection();
+			psm = connection.prepareStatement(sql);
+			psm.setInt(1, rat_id);
+			resultSet = psm.executeQuery();
+			while(resultSet.next()){
+				Rat rat = new Rat();
+				rat.setRat_id(resultSet.getInt("rat_id"));
+				rat.setRat_name(resultSet.getString("rat_name"));
+				rat.setRat_description(resultSet.getString("rat_description"));
+				rat.setRat_head(resultSet.getString("rat_head"));
+				return rat;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DaoUtil.close(connection, psm, resultSet);
+		}
+		return null;
+	}
 	
 }

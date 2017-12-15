@@ -16,8 +16,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 
 public class Test {
 	public static void main(String[] args) {
-		String string = "sdfsdfsdg\r\n<img>sfsdg<img>";
-		System.out.println(string.replaceFirst("<img>", "---"));
+		System.out.println(0%1);
 	}
 	
 	private void add() {

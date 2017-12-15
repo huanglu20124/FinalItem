@@ -5,7 +5,7 @@
 	id="WebApp_ID" version="3.1">
 	<display-name>final_item</display-name>
 	<!-- 登录过滤器-->
-<!-- 	<filter>
+	<filter>
 		<filter-name>loginFilter</filter-name>
 		<filter-class>com.finalItem.filter.LoginFilter</filter-class>
 	</filter>
@@ -13,9 +13,9 @@
 		<filter-name>loginFilter</filter-name>
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
- -->
+
 	<!-- 欢迎界面 -->
 	<welcome-file-list>
-		<welcome-file>main.jsp</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>
