@@ -20,6 +20,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.FilenameUtils;
 
 import com.finalItem.dao.NoteDao;
+import com.finalItem.dao.RatDao;
 import com.finalItem.domain.Note;
 import com.finalItem.domain.SimpleNote;
 import com.finalItem.util.Const;
@@ -29,7 +30,8 @@ import sun.net.www.content.text.plain;
 
 public class NoteService {
 	private NoteDao noteDao = new NoteDao();
-
+	private RatDao ratDao = new RatDao();
+	
 	public List<Note> getHotNote(HttpServletRequest request, HttpServletResponse response) {
 		// 得到5个最新的的热门贴，点赞数量要大于10，用于滚动视图演示
 		// 仅返回帖子id 标题 和图片
@@ -266,5 +268,23 @@ public class NoteService {
 		List<SimpleNote>list = noteDao.getUserSimpleNotes(user_id);
 		if(list == null) list = new ArrayList<>();
 		return list;
+	}
+
+	public String addGood(Integer note_id,Integer rat_id,String type){
+		System.out.println("type=" + type);
+		if(type.equals("0")){
+			//增加
+			noteDao.addNoteGood(note_id);
+			ratDao.addRatGood(rat_id);
+		}else {
+			//减少
+			noteDao.minusNoteGood(note_id);
+			ratDao.minusRatGood(rat_id);
+		}
+		return "修改成功";
+	}
+
+	public int deleteNote(Integer note_id){
+		return noteDao.deleteNote(note_id);
 	}
 }
