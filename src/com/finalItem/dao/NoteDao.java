@@ -20,7 +20,7 @@ public class NoteDao {
 	public List<Note> getFiveHotNotes(){
 		String sql = "select note_id, note_title from note"
 				+ " where note_good > 5 "
-				+ " order by note_time"
+				+ " order by note_good desc"
 				+ " limit 5";
 		Connection connection = null;
 		PreparedStatement psm = null;

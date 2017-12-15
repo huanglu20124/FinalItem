@@ -146,7 +146,7 @@
 			<div id="user">
 				<p>
 					<img class="userimage" src="images/me.png">
-					<span class="user_info"><%=note.getUser_name()%> 仓鼠种类：<%=note.getRat_name() %>
+					<span style="position:relative;font-size: 1.2em;top: 25px" class="user_info">作者：<%=note.getUser_name()%> &nbsp 仓鼠种类：<%=note.getRat_name() %>
 					</span>
 				</p>
 			</div>
